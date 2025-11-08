@@ -2,101 +2,125 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
 <title>Benardo Murati — CV</title>
 <style>
   :root{
     --bg:#ffffff;
-    --ink:#111827;
-    --muted:#6b7280;
-    --accent:#111827;
-    --chip:#f3f4f6;
-    --border:#e5e7eb;
+    --ink:#111827;         /* near-black */
+    --muted:#6b7280;       /* gray-500 */
+    --accent:#111827;      /* dark accents */
+    --chip:#f3f4f6;        /* gray-100 */
+    --border:#e5e7eb;      /* gray-200 */
+    --radius:18px;
   }
-  html,body{background:var(--bg); color:var(--ink); font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; margin:0;}
-  a{color:#0ea5e9; text-decoration:none}
-  a:hover{text-decoration:underline}
-  .container{max-width:980px; margin:48px auto; padding:0 24px;}
-  .card{display:grid; grid-template-columns: 290px 1fr; gap:28px; border:1px solid var(--border); border-radius:18px; overflow:hidden; box-shadow: 0 10px 24px rgba(0,0,0,.06)}
-  .left{background:#f9fafb; padding:28px}
-  .right{background:#fff; padding:32px}
-  .name{font-size:34px; font-weight:800; letter-spacing:.3px; text-align:center; margin:0 0 4px}
-  .headline{font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); text-align:center; margin:0 0 12px}
-  .section-title{font-size:12px; font-weight:800; letter-spacing:1.8px; text-transform:uppercase; background:var(--accent); color:#fff; padding:10px 12px; border-radius:8px; display:inline-block; margin:18px 0 10px}
-  .contact-list{list-style:none; padding:0; margin:8px 0 0}
-  .contact-list li{display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px dashed var(--border)}
+  html{
+    -webkit-text-size-adjust:100%;
+  }
+  body{
+    margin:0;
+    color:var(--ink);
+    background:var(--bg);
+    font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+  }
+  a{color:#0ea5e9;text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .container{max-width:980px;margin:40px auto;padding:0 24px;}
+  .card{
+    display:grid;grid-template-columns:290px 1fr;gap:28px;
+    border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 10px 24px rgba(0,0,0,.06);background:#fff;
+  }
+  .left{background:#f9fafb;padding:28px}
+  .right{background:#fff;padding:32px}
+  .name{font-size:34px;font-weight:800;letter-spacing:.2px;text-align:center;margin:0 0 4px}
+  .headline{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);text-align:center;margin:0 0 12px}
+  .section-title{
+    display:inline-block;background:var(--accent);color:#fff;
+    font-size:12px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;
+    padding:10px 12px;border-radius:8px;margin:16px 0 10px;
+  }
+  .block{margin-bottom:22px}
+  .contact-list{list-style:none;margin:8px 0 0;padding:0}
+  .contact-list li{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
   .key{font-weight:700}
   .muted{color:var(--muted)}
-  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
-  .chip{font-size:12px; padding:6px 10px; border-radius:999px; background:var(--chip); border:1px solid var(--border)}
-  .block{margin-bottom:22px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{font-size:12px;padding:6px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--border)}
+  .summary{font-size:15px;line-height:1.6}
   .job{margin:14px 0 18px}
-  .job h4{margin:0 0 4px; font-size:16px}
-  .job .meta{font-size:13px; color:var(--muted); margin-bottom:6px}
+  .job h4{margin:0 0 4px;font-size:18px}
+  .job .meta{font-size:13px;color:var(--muted);margin-bottom:6px}
   .edu{margin:10px 0 14px}
-  .edu h4{margin:0 0 4px; font-size:16px}
-  .edu .meta{font-size:13px; color:var(--muted)}
-  .summary{font-size:15px; line-height:1.6}
-  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-  .langlist{list-style: none; padding:0; margin:8px 0 0}
-  .langlist li{padding:6px 0}
-  /* Skill Circles */
-  .skill-circles{display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:12px}
-  .circle{position:relative; width:130px; height:130px; margin:auto}
-  .circle svg{transform:rotate(-90deg); width:130px; height:130px}
-  .circle .bg{stroke:#e5e7eb; stroke-width:12; fill:none}
-  .circle .fg{stroke:#111827; stroke-width:12; fill:none; stroke-linecap:round; stroke-dasharray: 0 999; transition: stroke-dasharray 1.2s ease-out}
-  .circle .label{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:0 6px}
-  .circle .pct{font-size:22px; font-weight:800}
-  .circle .title{font-size:13px; color:var(--muted); margin-top:4px; letter-spacing:.2px; text-transform:none; white-space:nowrap}
-  .skill-item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 0}
-  .bar{flex: 1; height:9px; border-radius:999px; background:#f3f4f6; position:relative; overflow:hidden}
-  .bar > span{position:absolute; inset:0 0 0 0; width:0%; height:100%; background:#111827; transition:width 1.2s ease-out}
-  .bar[data-level]:after{content:attr(data-level) '%'; position:absolute; right:-42px; top:-2px; font-size:12px; color:var(--muted)}
+  .edu h4{margin:0 0 4px;font-size:16px}
+  .edu .meta{font-size:13px;color:var(--muted)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .small{font-size:12px}
+  .langlist{list-style:none;margin:8px 0 0;padding:0}
+  .langlist li{padding:6px 0}
 
-  /* ===== Mobile tweaks ===== */
+  /* === Skill circles === */
+  .skill-circles{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:12px}
+  .circle{position:relative;width:130px;height:130px;margin:auto}
+  .circle svg{transform:rotate(-90deg);width:130px;height:130px}
+  .circle .bg{stroke:#e5e7eb;stroke-width:12;fill:none}
+  .circle .fg{stroke:var(--accent);stroke-width:12;fill:none;stroke-linecap:round;stroke-dasharray:0 999;transition:stroke-dasharray 1.1s ease-out}
+  .circle .label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6px}
+  .circle .pct{font-size:22px;font-weight:800}
+  .circle .title{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.2px;white-space:nowrap}
+
+  /* === Bars === */
+  .skill-item{display:flex;align-items:center;gap:12px;padding:8px 0}
+  .bar{flex:1;height:9px;border-radius:999px;background:#f3f4f6;position:relative;overflow:hidden}
+  .bar > span{position:absolute;inset:0;width:0;height:100%;background:var(--accent);transition:width 1.1s ease-out}
+  .bar[data-level]:after{content:attr(data-level) '%';position:absolute;right:-42px;top:-2px;font-size:12px;color:var(--muted)}
+
+  /* === MOBILE TUNING === */
   @media (max-width: 720px){
-    .container{padding:0 14px; margin:28px auto}
-    .card{grid-template-columns:1fr; gap:0; border-radius:16px}
-    .left{order:2; padding:18px}
-    .right{order:1; padding:20px}
+    .container{padding:env(safe-area-inset-left,12px) 14px env(safe-area-inset-bottom,12px) 14px;margin:20px auto;}
+    .card{grid-template-columns:1fr;gap:0;border-radius:14px}
+    .left{order:2;padding:16px 16px 18px}
+    .right{order:1;padding:18px}
     .name{font-size:26px}
-    .headline{font-size:12px; margin-bottom:8px}
-    .section-title{font-size:11px; padding:8px 10px; border-radius:7px}
-    .contact-list li{display:block; border-bottom:1px dashed var(--border); padding:8px 0}
+    .headline{font-size:12px;margin-bottom:8px}
+    .section-title{font-size:11px;padding:8px 10px;border-radius:7px}
+    .contact-list li{display:block;padding:8px 0}
     .grid-2{grid-template-columns:1fr}
-    .skill-circles{grid-template-columns:repeat(2,1fr); gap:18px}
-    .circle{width:96px; height:96px}
-    .circle svg{width:96px; height:96px}
-    .circle .bg, .circle .fg{stroke-width:10}
+    .skill-circles{grid-template-columns:repeat(2,1fr);gap:14px}
+    .circle{width:96px;height:96px}
+    .circle svg{width:96px;height:96px}
+    .circle .bg,.circle .fg{stroke-width:10}
     .circle .pct{font-size:18px}
     .circle .title{font-size:12px}
     .bar{height:8px}
-    .bar[data-level]:after{display:none} /* hide floating % on small screens */
-    .skill-item small{display:none}
-    .chips{gap:6px}
-    .chip{font-size:11px; padding:6px 9px}
+    .bar[data-level]:after{display:none} /* avoid overlap on small screens */
+    .chip{font-size:11px;padding:6px 9px}
+    .job h4{font-size:17px}
+    .summary{font-size:14.5px}
   }
   @media (max-width:420px){
-    .circle{width:88px; height:88px}
-    .circle svg{width:88px; height:88px}
+    .circle{width:86px;height:86px}
+    .circle svg{width:86px;height:86px}
     .circle .pct{font-size:16px}
     .section-title{font-size:10px}
   }
-  /* Print styles for clean PDF */
+
+  /* Print (kept simple; animations disabled when printing) */
   @media print{
-    .container{margin:0; padding:0}
-    .card{box-shadow:none; border:0}
-    a{text-decoration:none; color:inherit}
-    .circle .fg{transition:none}
-    .bar > span{transition:none}
+    .container{margin:0;padding:0}
+    .card{box-shadow:none;border:0}
+    .circle .fg,.bar > span{transition:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .circle .fg,.bar > span{transition:none}
   }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="card">
+
       <!-- LEFT -->
       <aside class="left">
         <h1 class="name">Benardo Murati</h1>
@@ -125,9 +149,7 @@
 
         <div class="block">
           <div class="section-title">Languages</div>
-          <ul class="langlist small">
-            <li>English (Fluent)</li>
-          </ul>
+          <ul class="langlist small"><li>English (Fluent)</li></ul>
         </div>
 
         <div class="block">
@@ -200,7 +222,6 @@
               </svg>
               <div class="label"><div class="pct">0%</div><div class="title">Programming</div></div>
             </div>
-
             <div class="circle" data-title="AI / ML" data-pct="75">
               <svg viewBox="0 0 120 120" aria-hidden="true">
                 <circle class="bg" cx="60" cy="60" r="50"></circle>
@@ -208,7 +229,6 @@
               </svg>
               <div class="label"><div class="pct">0%</div><div class="title">AI / ML</div></div>
             </div>
-
             <div class="circle" data-title="Tools" data-pct="85">
               <svg viewBox="0 0 120 120" aria-hidden="true">
                 <circle class="bg" cx="60" cy="60" r="50"></circle>
@@ -216,7 +236,6 @@
               </svg>
               <div class="label"><div class="pct">0%</div><div class="title">Tools</div></div>
             </div>
-
             <div class="circle" data-title="Soft Skills" data-pct="90">
               <svg viewBox="0 0 120 120" aria-hidden="true">
                 <circle class="bg" cx="60" cy="60" r="50"></circle>
@@ -231,32 +250,16 @@
           <div class="section-title">Technical Stack</div>
           <div class="grid-2">
             <div>
-              <div class="skill-item small">
-                <span>Java</span><div class="bar" data-level="80"><span></span></div>
-              </div>
-              <div class="skill-item small">
-                <span>Python</span><div class="bar" data-level="85"><span></span></div>
-              </div>
-              <div class="skill-item small">
-                <span>JavaScript</span><div class="bar" data-level="78"><span></span></div>
-              </div>
-              <div class="skill-item small">
-                <span>HTML/CSS</span><div class="bar" data-level="85"><span></span></div>
-              </div>
+              <div class="skill-item small"><span>Java</span><div class="bar" data-level="80"><span></span></div></div>
+              <div class="skill-item small"><span>Python</span><div class="bar" data-level="85"><span></span></div></div>
+              <div class="skill-item small"><span>JavaScript</span><div class="bar" data-level="78"><span></span></div></div>
+              <div class="skill-item small"><span>HTML/CSS</span><div class="bar" data-level="85"><span></span></div></div>
             </div>
             <div>
-              <div class="skill-item small">
-                <span>React</span><div class="bar" data-level="75"><span></span></div>
-              </div>
-              <div class="skill-item small">
-                <span>Node.js</span><div class="bar" data-level="72"><span></span></div>
-              </div>
-              <div class="skill-item small">
-                <span>TensorFlow</span><div class="bar" data-level="70"><span></span></div>
-              </div>
-              <div class="skill-item small">
-                <span>PyTorch</span><div class="bar" data-level="65"><span></span></div>
-              </div>
+              <div class="skill-item small"><span>React</span><div class="bar" data-level="75"><span></span></div></div>
+              <div class="skill-item small"><span>Node.js</span><div class="bar" data-level="72"><span></span></div></div>
+              <div class="skill-item small"><span>TensorFlow</span><div class="bar" data-level="70"><span></span></div></div>
+              <div class="skill-item small"><span>PyTorch</span><div class="bar" data-level="65"><span></span></div></div>
             </div>
           </div>
           <div class="chips" style="margin-top:10px">
@@ -274,52 +277,49 @@
           </div>
         </div>
       </section>
+
     </div>
   </div>
 
 <script>
-// Animate skill circles and bars when visible
+/* Animate circles/bars when visible; honors Reduce Motion */
 (function(){
   const circles = document.querySelectorAll('.circle');
   const bars = document.querySelectorAll('.bar');
-  const R = 50;
-  const CIRC = 2 * Math.PI * R;
+  const R = 50, CIRC = 2 * Math.PI * R;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function activateCircles(entry){
+  function animateNumber(el, to){
+    if(reduce){ el.textContent = to + '%'; return; }
+    let v = 0, step = Math.max(1, Math.round(to/30));
+    const t = setInterval(()=>{ v += step; if(v >= to){ v = to; clearInterval(t);} el.textContent = v + '%'; }, 20);
+  }
+  function onCircle(entry){
     const el = entry.target;
-    const pct = parseInt(el.getAttribute('data-pct'), 10) || 0;
+    const pct = parseInt(el.getAttribute('data-pct'),10)||0;
     const fg = el.querySelector('.fg');
     const label = el.querySelector('.pct');
-    const dash = (pct/100) * CIRC;
-    fg.style.strokeDasharray = dash + ' ' + (CIRC - dash);
-    let v = 0;
-    const step = Math.max(1, Math.round(pct/30));
-    const timer = setInterval(()=>{
-      v += step;
-      if(v >= pct){ v = pct; clearInterval(timer); }
-      label.textContent = v + '%';
-    }, 20);
+    const dash = (pct/100)*CIRC;
+    fg.style.strokeDasharray = dash + ' ' + (CIRC-dash);
+    animateNumber(label, pct);
     observer.unobserve(el);
   }
-
-  function activateBars(entry){
+  function onBar(entry){
     const bar = entry.target;
-    const level = parseInt(bar.getAttribute('data-level'), 10) || 0;
+    const level = parseInt(bar.getAttribute('data-level'),10)||0;
     bar.querySelector('span').style.width = level + '%';
     observer.unobserve(bar);
   }
-
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(!e.isIntersecting) return;
-      if(e.target.classList.contains('circle')) activateCircles(e);
-      if(e.target.classList.contains('bar')) activateBars(e);
+      if(e.target.classList.contains('circle')) onCircle(e);
+      if(e.target.classList.contains('bar')) onBar(e);
     });
   }, {threshold: 0.35});
 
   circles.forEach(c=>{
-    const fg = c.querySelector('.fg');
-    fg.style.strokeDasharray = '0 ' + CIRC;
+    c.querySelector('.fg').style.strokeDasharray = '0 ' + CIRC;
     observer.observe(c);
   });
   bars.forEach(b=> observer.observe(b));
