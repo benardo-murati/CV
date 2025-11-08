@@ -1,306 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="color-scheme" content="light" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
 <title>Benardo Murati — CV</title>
 <style>
+  /* v: theme-toggle-1 */
   :root{
+    /* Light theme */
     --bg:#ffffff;
-    --ink:#111827;         /* near-black */
-    --muted:#6b7280;       /* gray-500 */
-    --accent:#111827;      /* dark accents */
-    --chip:#f3f4f6;        /* gray-100 */
-    --border:#e5e7eb;      /* gray-200 */
+    --ink:#111827;        /* near-black */
+    --muted:#6b7280;      /* gray-500 */
+    --accent:#111827;     /* strokes/bars */
+    --badge:#111827;      /* pill titles background */
+    --chip:#f3f4f6;       /* chip bg */
+    --border:#e5e7eb;     /* card borders */
     --radius:18px;
-    --desktop-width:980px; /* reference width we scale from */
+    --shadow:0 10px 24px rgba(0,0,0,.06);
   }
-  html{ -webkit-text-size-adjust:100%; }
+  /* Dark theme variables */
+  .dark{
+    --bg:#0b1220;        /* deep navy */
+    --ink:#e5e7ef;       /* near-white text */
+    --muted:#9aa3b2;     /* soft gray-blue */
+    --accent:#e5e7ef;    /* light strokes/bars */
+    --badge:#0f172a;     /* darker pill bg */
+    --chip:#111827;
+    --border:#1f2937;
+    --shadow:0 10px 28px rgba(0,0,0,.35);
+  }
+
+  html{-webkit-text-size-adjust:100%}
   body{
-    margin:0;
-    color:var(--ink);
-    background:var(--bg);
-    font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans";
   }
-  a{color:#0ea5e9;text-decoration:none;}
-  a:hover{text-decoration:underline;}
+  a{color:#38bdf8;text-decoration:none}
+  a:hover{text-decoration:underline}
 
-  /* Viewport wrapper: gives phone a little breathing room */
-  .viewport{
-    padding:16px;               /* safe area padding on phones */
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
-    padding-top: max(12px, env(safe-area-inset-top));
-    padding-bottom: max(12px, env(safe-area-inset-bottom));
-  }
-
-  /* The scaling “stage” */
-  .stage{
-    width:var(--desktop-width);
-    margin:0 auto;
-    transform-origin: top left; /* scale from top-left so it fills nicely */
-    will-change: transform, height;
-  }
-
-  /* The actual content matches your desktop layout */
-  .container{width:var(--desktop-width); margin:40px auto; padding:0 24px;}
+  /* ===== Layout ===== */
+  .container{max-width:980px;margin:40px auto;padding:0 24px}
   .card{
     display:grid;grid-template-columns:290px 1fr;gap:28px;
-    border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
-    box-shadow:0 10px 24px rgba(0,0,0,.06);background:#fff;
+    background:#fff0; /* transparent, true bg via sections */
+    border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);
   }
-  .left{background:#f9fafb;padding:28px}
-  .right{background:#fff;padding:32px}
+  .left{background:color-mix(in oklab, var(--bg) 92%, #fff 8%);padding:28px}
+  .right{background:var(--bg);padding:32px}
+
   .name{font-size:34px;font-weight:800;letter-spacing:.2px;text-align:center;margin:0 0 4px}
   .headline{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);text-align:center;margin:0 0 12px}
+
   .section-title{
-    display:inline-block;background:var(--accent);color:#fff;
-    font-size:12px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;
+    display:inline-block;background:var(--badge);color:#fff;
+    font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;
     padding:10px 12px;border-radius:8px;margin:16px 0 10px;
   }
-  .block{margin-bottom:22px}
+  .block{margin-bottom:18px}
+
   .contact-list{list-style:none;margin:8px 0 0;padding:0}
-  .contact-list li{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+  .contact-list li{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--border)}
   .key{font-weight:700}
   .muted{color:var(--muted)}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
   .chip{font-size:12px;padding:6px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--border)}
+  .langlist{list-style:none;margin:8px 0 0;padding:0}
+  .langlist li{padding:6px 0}
+  .small{font-size:12px}
+
   .summary{font-size:15px;line-height:1.6}
-  .job{margin:14px 0 18px}
+  .job{margin:12px 0 16px}
   .job h4{margin:0 0 4px;font-size:18px}
   .job .meta{font-size:13px;color:var(--muted);margin-bottom:6px}
-  .edu{margin:10px 0 14px}
+  .edu{margin:8px 0 12px}
   .edu h4{margin:0 0 4px;font-size:16px}
   .edu .meta{font-size:13px;color:var(--muted)}
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .small{font-size:12px}
-  .langlist{list-style:none;margin:8px 0 0;padding:0}
-  .langlist li{padding:6px 0}
 
-  /* === Skill circles === */
+  /* ===== Skill circles ===== */
   .skill-circles{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:12px}
   .circle{position:relative;width:130px;height:130px;margin:auto}
   .circle svg{transform:rotate(-90deg);width:130px;height:130px}
-  .circle .bg{stroke:#e5e7eb;stroke-width:12;fill:none}
+  .circle .bg{stroke:var(--border);stroke-width:12;fill:none}
   .circle .fg{stroke:var(--accent);stroke-width:12;fill:none;stroke-linecap:round;stroke-dasharray:0 999;transition:stroke-dasharray 1.1s ease-out}
   .circle .label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6px}
   .circle .pct{font-size:22px;font-weight:800}
   .circle .title{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.2px;white-space:nowrap}
 
-  /* === Bars === */
-  .skill-item{display:flex;align-items:center;gap:12px;padding:8px 0}
-  .bar{flex:1;height:9px;border-radius:999px;background:#f3f4f6;position:relative;overflow:hidden}
-  .bar > span{position:absolute;inset:0;width:0;height:100%;background:var(--accent);transition:width 1.1s ease-out}
+  /* ===== Bars ===== */
+  .skill-item{display:flex;align-items:center;gap:12px;padding:7px 0}
+  .bar{flex:1;height:9px;border-radius:999px;background:color-mix(in oklab, var(--chip) 85%, var(--bg) 15%);position:relative;overflow:hidden;border:1px solid var(--border)}
+  .bar>span{position:absolute;inset:0;width:0;height:100%;background:var(--accent);transition:width 1.1s ease-out}
   .bar[data-level]:after{content:attr(data-level) '%';position:absolute;right:-42px;top:-2px;font-size:12px;color:var(--muted)}
 
-  /* Print (kept simple; animations disabled when printing) */
+  /* ===== Theme toggle button ===== */
+  .theme-toggle{
+    position:fixed;right:14px;top:14px;z-index:50;
+    display:flex;align-items:center;gap:8px;
+    padding:10px 12px;border-radius:999px;border:1px solid var(--border);
+    background:color-mix(in oklab, var(--bg) 70%, #ffffff 30%);
+    color:var(--ink); box-shadow:var(--shadow); cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .theme-toggle svg{width:18px;height:18px;display:block}
+  .theme-toggle .label{font-size:13px;font-weight:700;letter-spacing:.4px}
+
+  /* ===== Mobile tuning ===== */
+  @media (max-width:740px){
+    .container{padding:0 12px;margin:18px auto}
+    .card{grid-template-columns:1fr;gap:0;border-radius:14px}
+    .right{order:1;padding:16px 16px 4px}
+    .left{order:2;padding:14px 16px 16px;background:var(--bg);border-top:1px solid var(--border)}
+    .name{font-size:24px;margin-top:2px}
+    .headline{font-size:11.5px;margin-bottom:6px;letter-spacing:1.2px}
+    .section-title{font-size:10.5px;padding:7px 9px;border-radius:7px;margin:12px 0 8px}
+    .block{margin-bottom:14px}
+    .contact-list li{display:block;padding:6px 0}
+    .chip{font-size:11px;padding:5px 9px}
+    .summary{font-size:14px;line-height:1.55}
+    .job h4{font-size:16.5px}
+    .grid-2{grid-template-columns:1fr;gap:10px}
+
+    .skill-circles{grid-template-columns:repeat(2,1fr);gap:14px;justify-items:center}
+    .circle{width:92px;height:92px}
+    .circle svg{width:92px;height:92px}
+    .circle .bg,.circle .fg{stroke-width:10}
+    .circle .pct{font-size:17px}
+    .circle .title{font-size:11.5px}
+    .bar{height:8px}
+    .bar[data-level]:after{display:none}
+    .theme-toggle{right:10px;top:10px;padding:8px 10px}
+  }
+  @media (max-width:380px){
+    .right,.left{padding-left:12px;padding-right:12px}
+    .circle{width:84px;height:84px}
+    .circle svg{width:84px;height:84px}
+    .circle .pct{font-size:16px}
+    .section-title{font-size:10px}
+  }
+
+  /* Print */
   @media print{
-    .viewport{padding:0}
-    .stage{transform:none !important; width:auto; }
     .container{margin:0;padding:0}
     .card{box-shadow:none;border:0}
-    .circle .fg,.bar > span{transition:none}
+    .theme-toggle{display:none}
+    .circle .fg,.bar>span{transition:none}
   }
   @media (prefers-reduced-motion:reduce){
-    .circle .fg,.bar > span{transition:none}
+    .circle .fg,.bar>span{transition:none}
   }
 </style>
 </head>
 <body>
-  <div class="viewport">
-    <!-- This wrapper is what we scale on phones -->
-    <div id="stage" class="stage">
-      <div class="container">
-        <div class="card">
+  <!-- Theme toggle -->
+  <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle light/dark">
+    <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+    </svg>
+    <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <span class="label">Theme</span>
+  </button>
 
-          <!-- LEFT -->
-          <aside class="left">
-            <h1 class="name">Benardo Murati</h1>
-            <div class="headline">AI / Software Development</div>
+  <div class="container">
+    <div class="card">
 
-            <div class="block">
-              <div class="section-title">Contact</div>
-              <ul class="contact-list small">
-                <li><span class="key">Phone:</span> <span class="muted">+355 69 268 9066</span></li>
-                <li><span class="key">Email:</span> <a href="mailto:benardomurati@icloud.com">benardomurati@icloud.com</a></li>
-                <li><span class="key">LinkedIn:</span> <a href="https://www.linkedin.com/in/benardo-murati-1a6555315">linkedin.com/in/benardo-murati-1a6555315</a></li>
-                <li><span class="key">GitHub:</span> <a href="https://github.com/benardo-murati">github.com/benardo-murati</a></li>
-                <li><span class="key">Location:</span> <span class="muted">Tirana, Albania</span></li>
-              </ul>
-            </div>
+      <!-- LEFT -->
+      <aside class="left">
+        <h1 class="name">Benardo Murati</h1>
+        <div class="headline">AI / Software Development</div>
 
-            <div class="block">
-              <div class="section-title">Expertise</div>
-              <div class="chips">
-                <span class="chip">Full-Stack Development</span>
-                <span class="chip">AI/ML</span>
-                <span class="chip">Automation</span>
-                <span class="chip">IT Systems</span>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Languages</div>
-              <ul class="langlist small"><li>English (Fluent)</li></ul>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Certifications</div>
-              <ul class="langlist small">
-                <li>Harry Fultz Diploma</li>
-                <li>Polis Multimedia Design Workshop</li>
-              </ul>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Tech Highlights</div>
-              <ul class="langlist small">
-                <li>REST APIs · JSON</li>
-                <li>Unit Testing basics</li>
-                <li>CI/CD (GitHub Actions)</li>
-                <li>Containers basics (Docker)</li>
-              </ul>
-            </div>
-          </aside>
-
-          <!-- RIGHT -->
-          <section class="right">
-            <div class="block">
-              <div class="section-title">Summary</div>
-              <p class="summary">
-                AI-focused software developer with hands-on experience across desktop support and technical services.
-                I’m currently pursuing a Master’s degree at POLIS University, building on a BSc in Computer Science.
-                Comfortable across modern web stacks (React/Node), Python/Java backends, and practical ML workflows (TensorFlow/PyTorch).
-                I value problem solving, project ownership, and collaborative delivery.
-              </p>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Work Experience</div>
-              <div class="job">
-                <h4>TV KLAN — IT Support Specialist</h4>
-                <div class="meta">Sep 2023 – Jan 2024 · Albania</div>
-                <ul class="small">
-                  <li>Delivered technical services and desktop support for internal teams.</li>
-                  <li>Troubleshot device, network, and account issues to maintain uptime.</li>
-                  <li>Collaborated cross-functionally to improve support workflows.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Education</div>
-              <div class="edu">
-                <h4>POLIS University — Master’s Degree, Computer Science</h4>
-                <div class="meta">2025 – Present · Tirana, Albania</div>
-              </div>
-              <div class="edu">
-                <h4>POLIS University — Bachelor’s Degree, Computer Science</h4>
-                <div class="meta">Oct 2022 – Sep 2025</div>
-              </div>
-              <div class="edu">
-                <h4>Harry T Fultz — Professional Electronics High School</h4>
-                <div class="meta">Electrical & Electronics Engineering · Sep 2018 – Jul 2022</div>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Skills Summary</div>
-              <div class="skill-circles">
-                <div class="circle" data-title="Programming" data-pct="85">
-                  <svg viewBox="0 0 120 120" aria-hidden="true">
-                    <circle class="bg" cx="60" cy="60" r="50"></circle>
-                    <circle class="fg" cx="60" cy="60" r="50"></circle>
-                  </svg>
-                  <div class="label"><div class="pct">0%</div><div class="title">Programming</div></div>
-                </div>
-                <div class="circle" data-title="AI / ML" data-pct="75">
-                  <svg viewBox="0 0 120 120" aria-hidden="true">
-                    <circle class="bg" cx="60" cy="60" r="50"></circle>
-                    <circle class="fg" cx="60" cy="60" r="50"></circle>
-                  </svg>
-                  <div class="label"><div class="pct">0%</div><div class="title">AI / ML</div></div>
-                </div>
-                <div class="circle" data-title="Tools" data-pct="85">
-                  <svg viewBox="0 0 120 120" aria-hidden="true">
-                    <circle class="bg" cx="60" cy="60" r="50"></circle>
-                    <circle class="fg" cx="60" cy="60" r="50"></circle>
-                  </svg>
-                  <div class="label"><div class="pct">0%</div><div class="title">Tools</div></div>
-                </div>
-                <div class="circle" data-title="Soft Skills" data-pct="90">
-                  <svg viewBox="0 0 120 120" aria-hidden="true">
-                    <circle class="bg" cx="60" cy="60" r="50"></circle>
-                    <circle class="fg" cx="60" cy="60" r="50"></circle>
-                  </svg>
-                  <div class="label"><div class="pct">0%</div><div class="title">Soft Skills</div></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Technical Stack</div>
-              <div class="grid-2">
-                <div>
-                  <div class="skill-item small"><span>Java</span><div class="bar" data-level="80"><span></span></div></div>
-                  <div class="skill-item small"><span>Python</span><div class="bar" data-level="85"><span></span></div></div>
-                  <div class="skill-item small"><span>JavaScript</span><div class="bar" data-level="78"><span></span></div></div>
-                  <div class="skill-item small"><span>HTML/CSS</span><div class="bar" data-level="85"><span></span></div></div>
-                </div>
-                <div>
-                  <div class="skill-item small"><span>React</span><div class="bar" data-level="75"><span></span></div></div>
-                  <div class="skill-item small"><span>Node.js</span><div class="bar" data-level="72"><span></span></div></div>
-                  <div class="skill-item small"><span>TensorFlow</span><div class="bar" data-level="70"><span></span></div></div>
-                  <div class="skill-item small"><span>PyTorch</span><div class="bar" data-level="65"><span></span></div></div>
-                </div>
-              </div>
-              <div class="chips" style="margin-top:10px">
-                <span class="chip">Git</span><span class="chip">VS Code</span><span class="chip">Figma</span>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="section-title">Soft Skills</div>
-              <div class="chips">
-                <span class="chip">Problem Solving</span>
-                <span class="chip">Project Ownership</span>
-                <span class="chip">Team Collaboration</span>
-                <span class="chip">Communication</span>
-              </div>
-            </div>
-          </section>
-
+        <div class="block">
+          <div class="section-title">Contact</div>
+          <ul class="contact-list small">
+            <li><span class="key">Phone:</span> <span class="muted">+355 69 268 9066</span></li>
+            <li><span class="key">Email:</span> <a href="mailto:benardomurati@icloud.com">benardomurati@icloud.com</a></li>
+            <li><span class="key">LinkedIn:</span> <a href="https://www.linkedin.com/in/benardo-murati-1a6555315">linkedin.com/in/benardo-murati-1a6555315</a></li>
+            <li><span class="key">GitHub:</span> <a href="https://github.com/benardo-murati">github.com/benardo-murati</a></li>
+            <li><span class="key">Location:</span> <span class="muted">Tirana, Albania</span></li>
+          </ul>
         </div>
-      </div>
+
+        <div class="block">
+          <div class="section-title">Expertise</div>
+          <div class="chips">
+            <span class="chip">Full-Stack Development</span>
+            <span class="chip">AI/ML</span>
+            <span class="chip">Automation</span>
+            <span class="chip">IT Systems</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Languages</div>
+          <ul class="langlist small"><li>English (Fluent)</li></ul>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Certifications</div>
+          <ul class="langlist small">
+            <li>Harry Fultz Diploma</li>
+            <li>Polis Multimedia Design Workshop</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Tech Highlights</div>
+          <ul class="langlist small">
+            <li>REST APIs · JSON</li>
+            <li>Unit Testing basics</li>
+            <li>CI/CD (GitHub Actions)</li>
+            <li>Containers basics (Docker)</li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- RIGHT -->
+      <section class="right">
+        <div class="block">
+          <div class="section-title">Summary</div>
+          <p class="summary">
+            AI-focused software developer with hands-on experience across desktop support and technical services.
+            I’m currently pursuing a Master’s degree at POLIS University, building on a BSc in Computer Science.
+            Comfortable across modern web stacks (React/Node), Python/Java backends, and practical ML workflows (TensorFlow/PyTorch).
+            I value problem solving, project ownership, and collaborative delivery.
+          </p>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Work Experience</div>
+          <div class="job">
+            <h4>TV KLAN — IT Support Specialist</h4>
+            <div class="meta">Sep 2023 – Jan 2024 · Albania</div>
+            <ul class="small">
+              <li>Delivered technical services and desktop support for internal teams.</li>
+              <li>Troubleshot device, network, and account issues to maintain uptime.</li>
+              <li>Collaborated cross-functionally to improve support workflows.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Education</div>
+          <div class="edu">
+            <h4>POLIS University — Master’s Degree, Computer Science</h4>
+            <div class="meta">2025 – Present · Tirana, Albania</div>
+          </div>
+          <div class="edu">
+            <h4>POLIS University — Bachelor’s Degree, Computer Science</h4>
+            <div class="meta">Oct 2022 – Sep 2025</div>
+          </div>
+          <div class="edu">
+            <h4>Harry T Fultz — Professional Electronics High School</h4>
+            <div class="meta">Electrical & Electronics Engineering · Sep 2018 – Jul 2022</div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Skills Summary</div>
+          <div class="skill-circles">
+            <div class="circle" data-title="Programming" data-pct="85">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="bg" cx="60" cy="60" r="50"></circle>
+                <circle class="fg" cx="60" cy="60" r="50"></circle>
+              </svg>
+              <div class="label"><div class="pct">0%</div><div class="title">Programming</div></div>
+            </div>
+            <div class="circle" data-title="AI / ML" data-pct="75">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="bg" cx="60" cy="60" r="50"></circle>
+                <circle class="fg" cx="60" cy="60" r="50"></circle>
+              </svg>
+              <div class="label"><div class="pct">0%</div><div class="title">AI / ML</div></div>
+            </div>
+            <div class="circle" data-title="Tools" data-pct="85">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="bg" cx="60" cy="60" r="50"></circle>
+                <circle class="fg" cx="60" cy="60" r="50"></circle>
+              </svg>
+              <div class="label"><div class="pct">0%</div><div class="title">Tools</div></div>
+            </div>
+            <div class="circle" data-title="Soft Skills" data-pct="90">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="bg" cx="60" cy="60" r="50"></circle>
+                <circle class="fg" cx="60" cy="60" r="50"></circle>
+              </svg>
+              <div class="label"><div class="pct">0%</div><div class="title">Soft Skills</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Technical Stack</div>
+          <div class="grid-2">
+            <div>
+              <div class="skill-item small"><span>Java</span><div class="bar" data-level="80"><span></span></div></div>
+              <div class="skill-item small"><span>Python</span><div class="bar" data-level="85"><span></span></div></div>
+              <div class="skill-item small"><span>JavaScript</span><div class="bar" data-level="78"><span></span></div></div>
+              <div class="skill-item small"><span>HTML/CSS</span><div class="bar" data-level="85"><span></span></div></div>
+            </div>
+            <div>
+              <div class="skill-item small"><span>React</span><div class="bar" data-level="75"><span></span></div></div>
+              <div class="skill-item small"><span>Node.js</span><div class="bar" data-level="72"><span></span></div></div>
+              <div class="skill-item small"><span>TensorFlow</span><div class="bar" data-level="70"><span></span></div></div>
+              <div class="skill-item small"><span>PyTorch</span><div class="bar" data-level="65"><span></span></div></div>
+            </div>
+          </div>
+          <div class="chips" style="margin-top:10px">
+            <span class="chip">Git</span><span class="chip">VS Code</span><span class="chip">Figma</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Soft Skills</div>
+          <div class="chips">
+            <span class="chip">Problem Solving</span>
+            <span class="chip">Project Ownership</span>
+            <span class="chip">Team Collaboration</span>
+            <span class="chip">Communication</span>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
 
 <script>
-/* --- Fit-to-mobile scaling: keeps desktop layout exactly, scales on small screens --- */
+/* ===== Theme boot & toggle ===== */
 (function(){
-  const stage = document.getElementById('stage');
-  const REF = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--desktop-width')) || 980;
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if(saved === 'dark' || (!saved && prefersDark)) root.classList.add('dark');
 
-  function fit(){
-    // available inner width minus a little safety (padding handled by .viewport)
-    const vw = Math.max(320, window.innerWidth - 24);
-    const scale = Math.min(1, vw / REF);
-    stage.style.transform = 'scale(' + scale + ')';
-    // maintain clickable area height for the scaled content
-    const rect = stage.firstElementChild.getBoundingClientRect();
-    const fullHeight = stage.firstElementChild.offsetHeight * scale;
-    stage.style.height = fullHeight + 'px';
+  const btn = document.getElementById('themeToggle');
+  function setIcons(){
+    const dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    document.getElementById('icon-sun').style.display = dark ? 'none' : '';
+    document.getElementById('icon-moon').style.display = dark ? '' : 'none';
   }
-
-  window.addEventListener('resize', fit, {passive:true});
-  window.addEventListener('orientationchange', fit, {passive:true});
-  document.addEventListener('DOMContentLoaded', fit);
-  // small delayed run to catch mobile browser chrome hiding/showing
-  setTimeout(fit, 250);
+  setIcons();
+  btn.addEventListener('click', ()=>{
+    root.classList.toggle('dark');
+    const dark = root.classList.contains('dark');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+    setIcons();
+  });
 })();
 
-/* Animate circles/bars when visible; honors Reduce Motion */
+/* ===== Animate circles & bars when visible; respects Reduce Motion ===== */
 (function(){
   const circles = document.querySelectorAll('.circle');
   const bars = document.querySelectorAll('.bar');
@@ -334,7 +387,7 @@
       if(e.target.classList.contains('circle')) onCircle(e);
       if(e.target.classList.contains('bar')) onBar(e);
     });
-  }, {threshold: 0.35});
+  }, {threshold:0.35});
 
   circles.forEach(c=>{
     c.querySelector('.fg').style.strokeDasharray = '0 ' + CIRC;
