@@ -6,49 +6,34 @@
 <meta name="color-scheme" content="light dark"/>
 <title>Benardo Murati — CV</title>
 <style>
-  /* v: theme-toggle+mobile-compact-4 */
+  /* v: two-col-on-mobile-5 */
   :root{
-    /* Light theme */
-    --bg:#ffffff;
-    --ink:#111827;
-    --muted:#6b7280;
-    --accent:#111827;
-    --badge:#111827;
-    --chip:#f3f4f6;
-    --border:#e5e7eb;
-    --radius:18px;
-    --shadow:0 10px 24px rgba(0,0,0,.06);
+    /* Light */
+    --bg:#ffffff; --ink:#111827; --muted:#6b7280; --accent:#111827;
+    --badge:#111827; --chip:#f3f4f6; --border:#e5e7eb;
+    --radius:18px; --shadow:0 10px 24px rgba(0,0,0,.06);
   }
   .dark{
-    /* Dark theme */
-    --bg:#0b1220;
-    --ink:#e5e7ef;
-    --muted:#9aa3b2;
-    --accent:#e5e7ef;
-    --badge:#0f172a;
-    --chip:#111827;
-    --border:#1f2937;
+    /* Dark */
+    --bg:#0b1220; --ink:#e5e7ef; --muted:#9aa3b2; --accent:#e5e7ef;
+    --badge:#0f172a; --chip:#111827; --border:#1f2937;
     --shadow:0 10px 28px rgba(0,0,0,.35);
   }
-
   html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0;background:var(--bg);color:var(--ink);
-    font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans";
-    transition: background .18s ease, color .18s ease;
-  }
-  a{color:#38bdf8;text-decoration:none}
-  a:hover{text-decoration:underline}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans");
+       transition:background .18s ease,color .18s ease;}
+  a{color:#38bdf8;text-decoration:none} a:hover{text-decoration:underline}
 
-  /* ===== Layout (desktop) ===== */
+  /* ===== Layout defaults (desktop) ===== */
   .container{max-width:980px;margin:40px auto;padding:0 24px}
   .card{
-    display:grid;grid-template-columns:290px 1fr;gap:28px;
-    background:#0000;border:1px solid var(--border);border-radius:var(--radius);
-    overflow:hidden;box-shadow:var(--shadow);
+    display:grid; grid-template-columns:290px 1fr; gap:28px;
+    background:#0000; border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; box-shadow:var(--shadow);
   }
-  .left{background:var(--bg);padding:28px}
-  .right{background:var(--bg);padding:32px}
+  .left{background:var(--bg); padding:28px}
+  .right{background:var(--bg); padding:32px}
 
   .name{font-size:34px;font-weight:800;letter-spacing:.2px;text-align:center;margin:0 0 4px}
   .headline{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);text-align:center;margin:0 0 12px}
@@ -107,23 +92,25 @@
   .theme-toggle svg{width:18px;height:18px;display:block}
   .theme-toggle .label{font-size:13px;font-weight:700;letter-spacing:.4px}
 
-  /* ===== Mobile: compact but same look ===== */
+  /* ===== Two-column even on phones ===== */
+  /* iPhone 12/13/14 (390px) and similar: narrower columns, compact padding */
   @media (max-width:740px){
     .container{padding:0 12px;margin:18px auto}
-    .card{grid-template-columns:1fr;gap:0;border-radius:14px}
-    .right{order:1;padding:16px 16px 4px}
-    .left{order:2;padding:14px 16px 16px;background:var(--bg);border-top:1px solid var(--border)}
-    .name{font-size:24px;margin-top:2px}
-    .headline{font-size:11.5px;margin-bottom:6px;letter-spacing:1.2px}
-    .section-title{font-size:10.5px;padding:7px 9px;border-radius:7px;margin:12px 0 8px}
-    .block{margin-bottom:14px}
-    .contact-list li{display:block;padding:6px 0}
+    .card{grid-template-columns:220px 1fr; gap:16px; border-radius:14px}
+    .left{padding:14px}
+    .right{padding:14px 14px 6px}
+    .name{font-size:22px}
+    .headline{font-size:11px;margin-bottom:6px;letter-spacing:1.1px}
+    .section-title{font-size:10.5px;padding:7px 9px;border-radius:7px;margin:10px 0 8px}
+    .block{margin-bottom:12px}
+    .contact-list li{gap:8px;padding:6px 0}
     .chip{font-size:11px;padding:5px 9px}
-    .summary{font-size:14px;line-height:1.55}
-    .job h4{font-size:16.5px}
-    .grid-2{grid-template-columns:1fr;gap:10px}
+    .summary{font-size:14px;line-height:1.5}
+    .job h4{font-size:16px}
+    .grid-2{grid-template-columns:1fr;gap:8px}
 
-    .skill-circles{grid-template-columns:repeat(2,1fr);gap:14px;justify-items:center}
+    /* circles: 2×2 grid so they don’t squeeze */
+    .skill-circles{grid-template-columns:repeat(2,1fr);gap:12px}
     .circle{width:92px;height:92px}
     .circle svg{width:92px;height:92px}
     .circle .bg,.circle .fg{stroke-width:10}
@@ -133,8 +120,10 @@
     .bar[data-level]:after{display:none}
     .theme-toggle{right:10px;top:10px;padding:8px 10px}
   }
+  /* Very small devices (360px) */
   @media (max-width:380px){
-    .right,.left{padding-left:12px;padding-right:12px}
+    .card{grid-template-columns:200px 1fr; gap:12px}
+    .left,.right{padding-left:10px;padding-right:10px}
     .circle{width:84px;height:84px}
     .circle svg{width:84px;height:84px}
     .circle .pct{font-size:16px}
@@ -142,15 +131,9 @@
   }
 
   /* Print */
-  @media print{
-    .container{margin:0;padding:0}
-    .card{box-shadow:none;border:0}
-    .theme-toggle{display:none}
-    .circle .fg,.bar>span{transition:none}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .circle .fg,.bar>span{transition:none}
-  }
+  @media print{ .container{margin:0;padding:0} .card{box-shadow:none;border:0}
+    .theme-toggle{display:none} .circle .fg,.bar>span{transition:none}}
+  @media (prefers-reduced-motion:reduce){ .circle .fg,.bar>span{transition:none} }
 </style>
 </head>
 <body>
@@ -330,7 +313,7 @@
   </div>
 
 <script>
-/* ===== Theme boot & toggle (also restarts animations) ===== */
+/* ===== Theme boot & toggle (restarts animations) ===== */
 (function(){
   const root = document.documentElement;
   const saved = localStorage.getItem('theme');
@@ -350,7 +333,6 @@
     root.classList.toggle('dark', dark);
     localStorage.setItem('theme', dark ? 'dark' : 'light');
     setIcons();
-    // Restart animations after theme change for a smooth feel
     if (window.restartAnimations) window.restartAnimations();
   });
 })();
@@ -383,24 +365,20 @@
     document.querySelectorAll('.circle').forEach(c=>{
       const fg = c.querySelector('.fg');
       fg.style.strokeDasharray = '0 ' + CIRC;
-      const pct = c.querySelector('.pct');
-      pct.textContent = '0%';
+      c.querySelector('.pct').textContent = '0%';
     });
     document.querySelectorAll('.bar').forEach(b=>{
-      const span = b.querySelector('span');
-      span.style.width = '0%';
+      b.querySelector('span').style.width = '0%';
     });
   }
 
   function onCircle(el){
     const pctVal = parseInt(el.getAttribute('data-pct'),10)||0;
     const fg = el.querySelector('.fg');
-    const label = el.querySelector('.pct');
     const dash = (pctVal/100)*CIRC;
-    // force reflow for reliable restart
-    fg.getBoundingClientRect();
-    fg.style.strokeDasharray = dash + ' ' + (CIRC-dash);
-    animateNumber(label, pctVal);
+    fg.getBoundingClientRect();       // reflow for reliable restart
+    fg.style.strokeDasharray = `${dash} ${CIRC-dash}`;
+    animateNumber(el.querySelector('.pct'), pctVal);
   }
   function onBar(el){
     const level = parseInt(el.getAttribute('data-level'),10)||0;
@@ -408,21 +386,14 @@
     span.getBoundingClientRect();
     span.style.width = level + '%';
   }
+  function observeAll(){ document.querySelectorAll('.circle,.bar').forEach(t=> observer.observe(t)); }
 
-  function observeAll(){
-    document.querySelectorAll('.circle,.bar').forEach(t=> observer.observe(t));
-  }
-
-  // Public restart
   window.restartAnimations = function(){
-    resetTargets();
-    setupObserver();
-    // slight delay so CSS has applied new theme colors before anim starts
+    resetTargets(); setupObserver();
     requestAnimationFrame(()=>requestAnimationFrame(observeAll));
   };
 
-  // initial boot
-  window.restartAnimations();
+  window.restartAnimations(); // initial
 })();
 </script>
 </body>
