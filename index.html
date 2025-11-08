@@ -6,34 +6,31 @@
 <meta name="color-scheme" content="light dark"/>
 <title>Benardo Murati — CV</title>
 <style>
-  /* v: two-col-on-mobile-5 */
+  /* v6: mobile-optimized (stacked), theme toggle, animation restart */
   :root{
-    /* Light */
-    --bg:#ffffff; --ink:#111827; --muted:#6b7280; --accent:#111827;
-    --badge:#111827; --chip:#f3f4f6; --border:#e5e7eb;
+    --bg:#ffffff; --ink:#0f172a; --muted:#6b7280; --accent:#0f172a;
+    --badge:#0f172a; --chip:#f3f4f6; --border:#e5e7eb;
     --radius:18px; --shadow:0 10px 24px rgba(0,0,0,.06);
   }
   .dark{
-    /* Dark */
     --bg:#0b1220; --ink:#e5e7ef; --muted:#9aa3b2; --accent:#e5e7ef;
     --badge:#0f172a; --chip:#111827; --border:#1f2937;
     --shadow:0 10px 28px rgba(0,0,0,.35);
   }
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:var(--bg);color:var(--ink);
-       font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans");
-       transition:background .18s ease,color .18s ease;}
+       font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans";
+       transition:background .18s ease,color .18s ease}
   a{color:#38bdf8;text-decoration:none} a:hover{text-decoration:underline}
 
-  /* ===== Layout defaults (desktop) ===== */
   .container{max-width:980px;margin:40px auto;padding:0 24px}
   .card{
     display:grid; grid-template-columns:290px 1fr; gap:28px;
-    background:#0000; border:1px solid var(--border); border-radius:var(--radius);
-    overflow:hidden; box-shadow:var(--shadow);
+    border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+    background:var(--bg);
   }
-  .left{background:var(--bg); padding:28px}
-  .right{background:var(--bg); padding:32px}
+  .left{padding:28px}
+  .right{padding:32px}
 
   .name{font-size:34px;font-weight:800;letter-spacing:.2px;text-align:center;margin:0 0 4px}
   .headline{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);text-align:center;margin:0 0 12px}
@@ -44,7 +41,6 @@
     padding:10px 12px;border-radius:8px;margin:16px 0 10px;
   }
   .block{margin-bottom:18px}
-
   .contact-list{list-style:none;margin:8px 0 0;padding:0}
   .contact-list li{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--border)}
   .key{font-weight:700}
@@ -64,7 +60,7 @@
   .edu .meta{font-size:13px;color:var(--muted)}
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 
-  /* ===== Skill circles ===== */
+  /* Skill circles */
   .skill-circles{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:12px}
   .circle{position:relative;width:130px;height:130px;margin:auto}
   .circle svg{transform:rotate(-90deg);width:130px;height:130px}
@@ -74,13 +70,13 @@
   .circle .pct{font-size:22px;font-weight:800}
   .circle .title{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.2px;white-space:nowrap}
 
-  /* ===== Bars ===== */
+  /* Bars */
   .skill-item{display:flex;align-items:center;gap:12px;padding:7px 0}
   .bar{flex:1;height:9px;border-radius:999px;background:color-mix(in oklab, var(--chip) 85%, var(--bg) 15%);position:relative;overflow:hidden;border:1px solid var(--border)}
   .bar>span{position:absolute;inset:0;width:0;height:100%;background:var(--accent);transition:width 1.1s ease}
   .bar[data-level]:after{content:attr(data-level) '%';position:absolute;right:-42px;top:-2px;font-size:12px;color:var(--muted)}
 
-  /* ===== Theme toggle ===== */
+  /* Theme toggle */
   .theme-toggle{
     position:fixed;right:14px;top:14px;z-index:50;
     display:flex;align-items:center;gap:8px;
@@ -92,24 +88,23 @@
   .theme-toggle svg{width:18px;height:18px;display:block}
   .theme-toggle .label{font-size:13px;font-weight:700;letter-spacing:.4px}
 
-  /* ===== Two-column even on phones ===== */
-  /* iPhone 12/13/14 (390px) and similar: narrower columns, compact padding */
+  /* ===== Mobile: STACKED, compact typography & paddings ===== */
   @media (max-width:740px){
-    .container{padding:0 12px;margin:18px auto}
-    .card{grid-template-columns:220px 1fr; gap:16px; border-radius:14px}
-    .left{padding:14px}
-    .right{padding:14px 14px 6px}
-    .name{font-size:22px}
-    .headline{font-size:11px;margin-bottom:6px;letter-spacing:1.1px}
+    .container{padding:0 12px;margin:16px auto}
+    .card{grid-template-columns:1fr; gap:0; border-radius:14px}
+    .right{order:2;padding:14px 14px 6px}
+    .left{order:1;padding:14px 14px 10px;border-bottom:1px solid var(--border)}
+    .name{font-size: clamp(20px, 5vw, 24px); margin:2px 0 2px}
+    .headline{font-size: clamp(10px, 2.7vw, 12px); margin-bottom:6px; letter-spacing:1.1px}
     .section-title{font-size:10.5px;padding:7px 9px;border-radius:7px;margin:10px 0 8px}
     .block{margin-bottom:12px}
-    .contact-list li{gap:8px;padding:6px 0}
+    .contact-list li{display:block;padding:6px 0}
     .chip{font-size:11px;padding:5px 9px}
     .summary{font-size:14px;line-height:1.5}
     .job h4{font-size:16px}
     .grid-2{grid-template-columns:1fr;gap:8px}
 
-    /* circles: 2×2 grid so they don’t squeeze */
+    /* Circles: 2×2 */
     .skill-circles{grid-template-columns:repeat(2,1fr);gap:12px}
     .circle{width:92px;height:92px}
     .circle svg{width:92px;height:92px}
@@ -120,10 +115,9 @@
     .bar[data-level]:after{display:none}
     .theme-toggle{right:10px;top:10px;padding:8px 10px}
   }
-  /* Very small devices (360px) */
+  /* Ultra small devices */
   @media (max-width:380px){
-    .card{grid-template-columns:200px 1fr; gap:12px}
-    .left,.right{padding-left:10px;padding-right:10px}
+    .right,.left{padding-left:10px;padding-right:10px}
     .circle{width:84px;height:84px}
     .circle svg{width:84px;height:84px}
     .circle .pct{font-size:16px}
@@ -313,7 +307,7 @@
   </div>
 
 <script>
-/* ===== Theme boot & toggle (restarts animations) ===== */
+/* Theme boot & toggle (restarts animations) */
 (function(){
   const root = document.documentElement;
   const saved = localStorage.getItem('theme');
@@ -337,7 +331,7 @@
   });
 })();
 
-/* ===== Animate circles & bars when visible (restartable) ===== */
+/* Animate circles & bars when visible (restartable) */
 (function(){
   const R = 50, CIRC = 2 * Math.PI * R;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -363,8 +357,7 @@
 
   function resetTargets(){
     document.querySelectorAll('.circle').forEach(c=>{
-      const fg = c.querySelector('.fg');
-      fg.style.strokeDasharray = '0 ' + CIRC;
+      c.querySelector('.fg').style.strokeDasharray = '0 ' + CIRC;
       c.querySelector('.pct').textContent = '0%';
     });
     document.querySelectorAll('.bar').forEach(b=>{
@@ -376,7 +369,7 @@
     const pctVal = parseInt(el.getAttribute('data-pct'),10)||0;
     const fg = el.querySelector('.fg');
     const dash = (pctVal/100)*CIRC;
-    fg.getBoundingClientRect();       // reflow for reliable restart
+    fg.getBoundingClientRect(); // reflow
     fg.style.strokeDasharray = `${dash} ${CIRC-dash}`;
     animateNumber(el.querySelector('.pct'), pctVal);
   }
