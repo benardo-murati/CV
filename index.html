@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
 <title>Benardo Murati — CV</title>
 <style>
   :root{
@@ -54,11 +54,35 @@
   .bar > span{position:absolute; inset:0 0 0 0; width:0%; height:100%; background:#111827; transition:width 1.2s ease-out}
   .bar[data-level]:after{content:attr(data-level) '%'; position:absolute; right:-42px; top:-2px; font-size:12px; color:var(--muted)}
   .small{font-size:12px}
-  @media (max-width:920px){
-    .card{grid-template-columns:1fr}
-    .left{order:2}
-    .right{order:1}
-    .skill-circles{grid-template-columns:repeat(2,1fr)}
+
+  /* ===== Mobile tweaks ===== */
+  @media (max-width: 720px){
+    .container{padding:0 14px; margin:28px auto}
+    .card{grid-template-columns:1fr; gap:0; border-radius:16px}
+    .left{order:2; padding:18px}
+    .right{order:1; padding:20px}
+    .name{font-size:26px}
+    .headline{font-size:12px; margin-bottom:8px}
+    .section-title{font-size:11px; padding:8px 10px; border-radius:7px}
+    .contact-list li{display:block; border-bottom:1px dashed var(--border); padding:8px 0}
+    .grid-2{grid-template-columns:1fr}
+    .skill-circles{grid-template-columns:repeat(2,1fr); gap:18px}
+    .circle{width:96px; height:96px}
+    .circle svg{width:96px; height:96px}
+    .circle .bg, .circle .fg{stroke-width:10}
+    .circle .pct{font-size:18px}
+    .circle .title{font-size:12px}
+    .bar{height:8px}
+    .bar[data-level]:after{display:none} /* hide floating % on small screens */
+    .skill-item small{display:none}
+    .chips{gap:6px}
+    .chip{font-size:11px; padding:6px 9px}
+  }
+  @media (max-width:420px){
+    .circle{width:88px; height:88px}
+    .circle svg{width:88px; height:88px}
+    .circle .pct{font-size:16px}
+    .section-title{font-size:10px}
   }
   /* Print styles for clean PDF */
   @media print{
