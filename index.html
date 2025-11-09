@@ -4,9 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="color-scheme" content="light dark"/>
+<!-- Stop iOS from auto-linking/enlarging phone numbers -->
+<meta name="format-detection" content="telephone=no">
 <title>Benardo Murati — CV</title>
 <style>
-  /* v9: phone-friendly two-column with compact left rail + hard overrides */
+  /* v9.2: phone-friendly two-column; iOS hardeners added */
+  *,*::before,*::after{box-sizing:border-box}
+
   :root{
     --bg:#ffffff; --ink:#0f172a; --muted:#6b7280; --accent:#0f172a;
     --badge:#0f172a; --chip:#f3f4f6; --border:#e5e7eb;
@@ -17,7 +21,13 @@
     --badge:#0f172a; --chip:#111827; --border:#1f2937;
     --shadow:0 10px 28px rgba(0,0,0,.35);
   }
-  html{-webkit-text-size-adjust:100%}
+
+  /* Prevent iOS font boosting */
+  html{
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
   body{
     margin:0;background:var(--bg);color:var(--ink);
     font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans";
@@ -92,10 +102,13 @@
     .name{font-size:28px}
   }
 
-  /* ========= Phones: KEEP TWO COLUMNS but with a smaller left rail ========= */
+  /* ========= Phones: KEEP TWO COLUMNS with a compact left rail ========= */
   @media (max-width:740px){
     .container{padding:0 10px;margin:14px auto}
-    .card{grid-template-columns:160px 1fr !important; gap:10px !important; border-radius:14px}
+    .card{
+      grid-template-columns:160px 1fr !important;
+      gap:10px !important; border-radius:14px;
+    }
     .left{padding:10px !important}
     .right{padding:10px 10px 6px !important}
     .name{font-size:18px !important;margin:0}
