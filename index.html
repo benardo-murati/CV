@@ -4,17 +4,17 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="color-scheme" content="light dark"/>
-<!-- Stop iOS from auto-linking/enlarging phone numbers -->
-<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="telephone=no"/>
 <title>Benardo Murati — CV</title>
 <style>
-  /* v9.2: phone-friendly two-column; iOS hardeners added */
+  /* v10: exact-desktop-on-phone via scale-down, iOS hardeners */
   *,*::before,*::after{box-sizing:border-box}
 
   :root{
     --bg:#ffffff; --ink:#0f172a; --muted:#6b7280; --accent:#0f172a;
     --badge:#0f172a; --chip:#f3f4f6; --border:#e5e7eb;
     --radius:18px; --shadow:0 10px 24px rgba(0,0,0,.06);
+    --stage-w:980px;
   }
   .dark{
     --bg:#0b1220; --ink:#e5e7ef; --muted:#9aa3b2; --accent:#e5e7ef;
@@ -22,11 +22,8 @@
     --shadow:0 10px 28px rgba(0,0,0,.35);
   }
 
-  /* Prevent iOS font boosting */
-  html{
-    -webkit-text-size-adjust:100%;
-    text-size-adjust:100%;
-  }
+  /* stop iOS font boosting */
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
   body{
     margin:0;background:var(--bg);color:var(--ink);
@@ -37,8 +34,23 @@
   a{color:#38bdf8;text-decoration:none;word-break:break-word}
   a:hover{text-decoration:underline}
 
-  /* ========= Desktop ========= */
-  .container{max-width:980px;margin:40px auto;padding:0 24px}
+  /* ----- Stage: fixed desktop width; centered ----- */
+  .viewport{width:100%;display:flex;justify-content:center}
+  .stage{width:var(--stage-w);margin:40px 0;padding:0 24px;overflow:visible}
+
+  /* When viewport is smaller than the stage, scale the entire stage down */
+  @media (max-width:980px){
+    .viewport{overflow:hidden}               /* hide layout overflow after scaling */
+    .stage{
+      transform-origin:top center;
+      --scale: calc(100vw / var(--stage-w));
+      transform: scale(var(--scale));
+      /* keep visible area centered vertically too */
+      margin:20px 0;
+    }
+  }
+
+  /* ---- Card (desktop layout) ---- */
   .card{
     display:grid; grid-template-columns:290px 1fr; gap:28px;
     border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
@@ -94,58 +106,8 @@
   .theme-toggle svg{width:18px;height:18px;display:block}
   .theme-toggle .label{font-size:13px;font-weight:700;letter-spacing:.4px}
 
-  /* ========= Narrow tablets ========= */
-  @media (max-width:900px){
-    .container{padding:0 18px}
-    .card{grid-template-columns:240px 1fr; gap:18px}
-    .left{padding:20px} .right{padding:22px}
-    .name{font-size:28px}
-  }
-
-  /* ========= Phones: KEEP TWO COLUMNS with a compact left rail ========= */
-  @media (max-width:740px){
-    .container{padding:0 10px;margin:14px auto}
-    .card{
-      grid-template-columns:160px 1fr !important;
-      gap:10px !important; border-radius:14px;
-    }
-    .left{padding:10px !important}
-    .right{padding:10px 10px 6px !important}
-    .name{font-size:18px !important;margin:0}
-    .headline{font-size:10.5px !important;margin:2px 0 6px;letter-spacing:1px}
-    .section-title{font-size:10px !important;padding:6px 8px;border-radius:7px;margin:8px 0 6px}
-    .block{margin-bottom:10px}
-    .contact-list li{display:block;padding:5px 0;border-bottom:1px dashed var(--border)}
-    .chip{font-size:10.5px;padding:4px 8px}
-    .summary{font-size:13.2px;line-height:1.45}
-    .job h4{font-size:15px}
-    .grid-2{grid-template-columns:1fr;gap:8px}
-
-    /* circles smaller */
-    .skill-circles{grid-template-columns:repeat(2,1fr);gap:10px}
-    .circle{width:82px;height:82px}
-    .circle svg{width:82px;height:82px}
-    .circle .bg,.circle .fg{stroke-width:9}
-    .circle .pct{font-size:15px}
-    .circle .title{font-size:10.5px}
-    .bar{height:7px}
-    .bar[data-level]:after{display:none}
-    .theme-toggle{right:10px;top:10px;padding:8px 10px}
-  }
-
-  /* ========= Very small (<=380px): still 2 cols, even narrower left ========= */
-  @media (max-width:380px){
-    .card{grid-template-columns:150px 1fr !important}
-    .left,.right{padding-left:8px !important;padding-right:8px !important}
-    .name{font-size:17px !important}
-    .headline{font-size:9.8px !important}
-    .circle{width:76px;height:76px}
-    .circle svg{width:76px;height:76px}
-    .circle .pct{font-size:14px}
-  }
-
   /* Print / motion */
-  @media print{ .container{margin:0;padding:0} .card{box-shadow:none;border:0}
+  @media print{ .stage{margin:0;padding:0} .card{box-shadow:none;border:0}
     .theme-toggle{display:none} .circle .fg,.bar>span{transition:none}}
   @media (prefers-reduced-motion:reduce){ .circle .fg,.bar>span{transition:none} }
 </style>
@@ -163,165 +125,168 @@
     <span class="label">Theme</span>
   </button>
 
-  <div class="container">
-    <div class="card">
+  <!-- Desktop-width stage that scales down on phones -->
+  <div class="viewport">
+    <div class="stage">
 
-      <!-- LEFT -->
-      <aside class="left">
-        <h1 class="name">Benardo Murati</h1>
-        <div class="headline">AI / Software Development</div>
+      <div class="card">
+        <!-- LEFT -->
+        <aside class="left">
+          <h1 class="name">Benardo Murati</h1>
+          <div class="headline">AI / Software Development</div>
 
-        <div class="block">
-          <div class="section-title">Contact</div>
-          <ul class="contact-list small">
-            <li><span class="key">Phone:</span> <span class="muted">+355 69 268 9066</span></li>
-            <li><span class="key">Email:</span> <a href="mailto:benardomurati@icloud.com">benardomurati@icloud.com</a></li>
-            <li><span class="key">LinkedIn:</span> <a href="https://www.linkedin.com/in/benardo-murati-1a6555315">linkedin.com/in/benardo-murati-1a6555315</a></li>
-            <li><span class="key">GitHub:</span> <a href="https://github.com/benardo-murati">github.com/benardo-murati</a></li>
-            <li><span class="key">Location:</span> <span class="muted">Tirana, Albania</span></li>
-          </ul>
-        </div>
-
-        <div class="block">
-          <div class="section-title">Expertise</div>
-          <div class="chips">
-            <span class="chip">Full-Stack Development</span>
-            <span class="chip">AI/ML</span>
-            <span class="chip">Automation</span>
-            <span class="chip">IT Systems</span>
-          </div>
-        </div>
-
-        <div class="block">
-          <div class="section-title">Languages</div>
-          <ul class="langlist small"><li>English (Fluent)</li></ul>
-        </div>
-
-        <div class="block">
-          <div class="section-title">Certifications</div>
-          <ul class="langlist small">
-            <li>Harry Fultz Diploma</li>
-            <li>Polis Multimedia Design Workshop</li>
-          </ul>
-        </div>
-
-        <div class="block">
-          <div class="section-title">Tech Highlights</div>
-          <ul class="langlist small">
-            <li>REST APIs · JSON</li>
-            <li>Unit Testing basics</li>
-            <li>CI/CD (GitHub Actions)</li>
-            <li>Containers basics (Docker)</li>
-          </ul>
-        </div>
-      </aside>
-
-      <!-- RIGHT -->
-      <section class="right">
-        <div class="block">
-          <div class="section-title">Summary</div>
-          <p class="summary">
-            AI-focused software developer with hands-on experience across desktop support and technical services.
-            I’m currently pursuing a Master’s degree at POLIS University, building on a BSc in Computer Science.
-            Comfortable across modern web stacks (React/Node), Python/Java backends, and practical ML workflows (TensorFlow/PyTorch).
-            I value problem solving, project ownership, and collaborative delivery.
-          </p>
-        </div>
-
-        <div class="block">
-          <div class="section-title">Work Experience</div>
-          <div class="job">
-            <h4>TV KLAN — IT Support Specialist</h4>
-            <div class="meta">Sep 2023 – Jan 2024 · Albania</div>
-            <ul class="small">
-              <li>Delivered technical services and desktop support for internal teams.</li>
-              <li>Troubleshot device, network, and account issues to maintain uptime.</li>
-              <li>Collaborated cross-functionally to improve support workflows.</li>
+          <div class="block">
+            <div class="section-title">Contact</div>
+            <ul class="contact-list small">
+              <li><span class="key">Phone:</span> <span class="muted">+355 69 268 9066</span></li>
+              <li><span class="key">Email:</span> <a href="mailto:benardomurati@icloud.com">benardomurati@icloud.com</a></li>
+              <li><span class="key">LinkedIn:</span> <a href="https://www.linkedin.com/in/benardo-murati-1a6555315">linkedin.com/in/benardo-murati-1a6555315</a></li>
+              <li><span class="key">GitHub:</span> <a href="https://github.com/benardo-murati">github.com/benardo-murati</a></li>
+              <li><span class="key">Location:</span> <span class="muted">Tirana, Albania</span></li>
             </ul>
           </div>
-        </div>
 
-        <div class="block">
-          <div class="section-title">Education</div>
-          <div class="edu">
-            <h4>POLIS University — Master’s Degree, Computer Science</h4>
-            <div class="meta">2025 – Present · Tirana, Albania</div>
+          <div class="block">
+            <div class="section-title">Expertise</div>
+            <div class="chips">
+              <span class="chip">Full-Stack Development</span>
+              <span class="chip">AI/ML</span>
+              <span class="chip">Automation</span>
+              <span class="chip">IT Systems</span>
+            </div>
           </div>
-          <div class="edu">
-            <h4>POLIS University — Bachelor’s Degree, Computer Science</h4>
-            <div class="meta">Oct 2022 – Sep 2025</div>
-          </div>
-          <div class="edu">
-            <h4>Harry T Fultz — Professional Electronics High School</h4>
-            <div class="meta">Electrical & Electronics Engineering · Sep 2018 – Jul 2022</div>
-          </div>
-        </div>
 
-        <div class="block">
-          <div class="section-title">Skills Summary</div>
-          <div class="skill-circles">
-            <div class="circle" data-title="Programming" data-pct="85">
-              <svg viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="bg" cx="60" cy="60" r="50"></circle>
-                <circle class="fg" cx="60" cy="60" r="50"></circle>
-              </svg>
-              <div class="label"><div class="pct">0%</div><div class="title">Programming</div></div>
-            </div>
-            <div class="circle" data-title="AI / ML" data-pct="75">
-              <svg viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="bg" cx="60" cy="60" r="50"></circle>
-                <circle class="fg" cx="60" cy="60" r="50"></circle>
-              </svg>
-              <div class="label"><div class="pct">0%</div><div class="title">AI / ML</div></div>
-            </div>
-            <div class="circle" data-title="Tools" data-pct="85">
-              <svg viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="bg" cx="60" cy="60" r="50"></circle>
-                <circle class="fg" cx="60" cy="60" r="50"></circle>
-              </svg>
-              <div class="label"><div class="pct">0%</div><div class="title">Tools</div></div>
-            </div>
-            <div class="circle" data-title="Soft Skills" data-pct="90">
-              <svg viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="bg" cx="60" cy="60" r="50"></circle>
-                <circle class="fg" cx="60" cy="60" r="50"></circle>
-              </svg>
-              <div class="label"><div class="pct">0%</div><div class="title">Soft Skills</div></div>
-            </div>
+          <div class="block">
+            <div class="section-title">Languages</div>
+            <ul class="langlist small"><li>English (Fluent)</li></ul>
           </div>
-        </div>
 
-        <div class="block">
-          <div class="section-title">Technical Stack</div>
-          <div class="grid-2">
-            <div>
-              <div class="skill-item small"><span>Java</span><div class="bar" data-level="80"><span></span></div></div>
-              <div class="skill-item small"><span>Python</span><div class="bar" data-level="85"><span></span></div></div>
-              <div class="skill-item small"><span>JavaScript</span><div class="bar" data-level="78"><span></span></div></div>
-              <div class="skill-item small"><span>HTML/CSS</span><div class="bar" data-level="85"><span></span></div></div>
-            </div>
-            <div>
-              <div class="skill-item small"><span>React</span><div class="bar" data-level="75"><span></span></div></div>
-              <div class="skill-item small"><span>Node.js</span><div class="bar" data-level="72"><span></span></div></div>
-              <div class="skill-item small"><span>TensorFlow</span><div class="bar" data-level="70"><span></span></div></div>
-              <div class="skill-item small"><span>PyTorch</span><div class="bar" data-level="65"><span></span></div></div>
-            </div>
+          <div class="block">
+            <div class="section-title">Certifications</div>
+            <ul class="langlist small">
+              <li>Harry Fultz Diploma</li>
+              <li>Polis Multimedia Design Workshop</li>
+            </ul>
           </div>
-          <div class="chips" style="margin-top:10px">
-            <span class="chip">Git</span><span class="chip">VS Code</span><span class="chip">Figma</span>
-          </div>
-        </div>
 
-        <div class="block">
-          <div class="section-title">Soft Skills</div>
-          <div class="chips">
-            <span class="chip">Problem Solving</span>
-            <span class="chip">Project Ownership</span>
-            <span class="chip">Team Collaboration</span>
-            <span class="chip">Communication</span>
+          <div class="block">
+            <div class="section-title">Tech Highlights</div>
+            <ul class="langlist small">
+              <li>REST APIs · JSON</li>
+              <li>Unit Testing basics</li>
+              <li>CI/CD (GitHub Actions)</li>
+              <li>Containers basics (Docker)</li>
+            </ul>
           </div>
-        </div>
-      </section>
+        </aside>
+
+        <!-- RIGHT -->
+        <section class="right">
+          <div class="block">
+            <div class="section-title">Summary</div>
+            <p class="summary">
+              AI-focused software developer with hands-on experience across desktop support and technical services.
+              I’m currently pursuing a Master’s degree at POLIS University, building on a BSc in Computer Science.
+              Comfortable across modern web stacks (React/Node), Python/Java backends, and practical ML workflows (TensorFlow/PyTorch).
+              I value problem solving, project ownership, and collaborative delivery.
+            </p>
+          </div>
+
+          <div class="block">
+            <div class="section-title">Work Experience</div>
+            <div class="job">
+              <h4>TV KLAN — IT Support Specialist</h4>
+              <div class="meta">Sep 2023 – Jan 2024 · Albania</div>
+              <ul class="small">
+                <li>Delivered technical services and desktop support for internal teams.</li>
+                <li>Troubleshot device, network, and account issues to maintain uptime.</li>
+                <li>Collaborated cross-functionally to improve support workflows.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-title">Education</div>
+            <div class="edu">
+              <h4>POLIS University — Master’s Degree, Computer Science</h4>
+              <div class="meta">2025 – Present · Tirana, Albania</div>
+            </div>
+            <div class="edu">
+              <h4>POLIS University — Bachelor’s Degree, Computer Science</h4>
+              <div class="meta">Oct 2022 – Sep 2025</div>
+            </div>
+            <div class="edu">
+              <h4>Harry T Fultz — Professional Electronics High School</h4>
+              <div class="meta">Electrical & Electronics Engineering · Sep 2018 – Jul 2022</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-title">Skills Summary</div>
+            <div class="skill-circles">
+              <div class="circle" data-title="Programming" data-pct="85">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="bg" cx="60" cy="60" r="50"></circle>
+                  <circle class="fg" cx="60" cy="60" r="50"></circle>
+                </svg>
+                <div class="label"><div class="pct">0%</div><div class="title">Programming</div></div>
+              </div>
+              <div class="circle" data-title="AI / ML" data-pct="75">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="bg" cx="60" cy="60" r="50"></circle>
+                  <circle class="fg" cx="60" cy="60" r="50"></circle>
+                </svg>
+                <div class="label"><div class="pct">0%</div><div class="title">AI / ML</div></div>
+              </div>
+              <div class="circle" data-title="Tools" data-pct="85">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="bg" cx="60" cy="60" r="50"></circle>
+                  <circle class="fg" cx="60" cy="60" r="50"></circle>
+                </svg>
+                <div class="label"><div class="pct">0%</div><div class="title">Tools</div></div>
+              </div>
+              <div class="circle" data-title="Soft Skills" data-pct="90">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="bg" cx="60" cy="60" r="50"></circle>
+                  <circle class="fg" cx="60" cy="60" r="50"></circle>
+                </svg>
+                <div class="label"><div class="pct">0%</div><div class="title">Soft Skills</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-title">Technical Stack</div>
+            <div class="grid-2">
+              <div>
+                <div class="skill-item small"><span>Java</span><div class="bar" data-level="80"><span></span></div></div>
+                <div class="skill-item small"><span>Python</span><div class="bar" data-level="85"><span></span></div></div>
+                <div class="skill-item small"><span>JavaScript</span><div class="bar" data-level="78"><span></span></div></div>
+                <div class="skill-item small"><span>HTML/CSS</span><div class="bar" data-level="85"><span></span></div></div>
+              </div>
+              <div>
+                <div class="skill-item small"><span>React</span><div class="bar" data-level="75"><span></span></div></div>
+                <div class="skill-item small"><span>Node.js</span><div class="bar" data-level="72"><span></span></div></div>
+                <div class="skill-item small"><span>TensorFlow</span><div class="bar" data-level="70"><span></span></div></div>
+                <div class="skill-item small"><span>PyTorch</span><div class="bar" data-level="65"><span></span></div></div>
+              </div>
+            </div>
+            <div class="chips" style="margin-top:10px">
+              <span class="chip">Git</span><span class="chip">VS Code</span><span class="chip">Figma</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-title">Soft Skills</div>
+            <div class="chips">
+              <span class="chip">Problem Solving</span>
+              <span class="chip">Project Ownership</span>
+              <span class="chip">Team Collaboration</span>
+              <span class="chip">Communication</span>
+            </div>
+          </div>
+        </section>
+      </div>
 
     </div>
   </div>
@@ -389,7 +354,7 @@
     const pctVal = parseInt(el.getAttribute('data-pct'),10)||0;
     const fg = el.querySelector('.fg');
     const dash = (pctVal/100)*CIRC;
-    fg.getBoundingClientRect(); // reflow
+    fg.getBoundingClientRect();
     fg.style.strokeDasharray = `${dash} ${CIRC-dash}`;
     animateNumber(el.querySelector('.pct'), pctVal);
   }
