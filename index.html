@@ -40,15 +40,18 @@
 
   /* When viewport is smaller than the stage, scale the entire stage down */
   @media (max-width:980px){
-    .viewport{overflow:hidden}               /* hide layout overflow after scaling */
-    .stage{
-      transform-origin:top center;
-      --scale: calc(100vw / var(--stage-w));
-      transform: scale(var(--scale));
-      /* keep visible area centered vertically too */
-      margin:20px 0;
-    }
+  /* add a small top gap and respect the safe area */
+  .viewport{
+    overflow:hidden;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 24px); /* tweak 24px if you want more/less */
   }
+  .stage{
+    transform-origin:top center;
+    --scale: calc(100vw / var(--stage-w));
+    transform: scale(var(--scale));
+    margin: 0 0 24px;  /* a touch more space at bottom too */
+  }
+}
 
   /* ---- Card (desktop layout) ---- */
   .card{
